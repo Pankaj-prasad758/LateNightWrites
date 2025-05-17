@@ -1,4 +1,4 @@
-import ".env.sample" 
+// import ".env.sample" 
 const config = {
   appwriteEndPointURL: String(import.meta.env.VITE_APPWRITE_ENDPOINT_URL),
   appwriteProjectID: String(import.meta.env.VITE_APPWRITE_PROJECT_ID),
