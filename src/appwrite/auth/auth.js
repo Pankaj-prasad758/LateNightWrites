@@ -2,7 +2,6 @@ import { config } from "tailwindcss/plugin";
 import { Client, Account, ID } from "appwrite";
 import config from "../config/config";
 
-
 // Reuseable Auth service code
 export class AuthService {
   client = new Client();
@@ -12,12 +11,10 @@ export class AuthService {
     this.client
       .setEndpoint(config.appwriteEndPointURL)
       .setProject(config.appwriteProjectID);
-
     this.account = new Account(this.client);
   }
 
   async createAccount({ email, password, name }) {
-    
     try {
       const userAccount = await this.account.create(
         ID.unique(),
