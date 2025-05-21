@@ -49,9 +49,7 @@ export class AuthService {
       const getCurrentUserState = await this.account.get(email, password);
       return getCurrentUserState;
     } catch (error) {
-      console.log("getCurrebtUser error");
-
-      throw error;
+      console.log("getCurrebtUser error", error);
     }
 
     return null;
