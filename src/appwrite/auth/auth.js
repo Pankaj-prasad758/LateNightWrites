@@ -1,6 +1,6 @@
-import { config } from "tailwindcss/plugin";
+
 import { Client, Account, ID } from "appwrite";
-import config from "../config/config";
+import config from "../../config/config.js";
 
 // Reuseable Auth service code
 export class AuthService {
