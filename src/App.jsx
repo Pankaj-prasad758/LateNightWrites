@@ -2,53 +2,39 @@ import "./App.css";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import authService from "./appwrite/auth/auth.js";
-// import { login, logout } from "./store/authSlice";
-import {loginOne, logoutOne} from "./storeRevision/authSliceRev.js"
-import {Header, Footer} from "./component/index.js"
+import { login, logout } from "./store/authSlice.js";
+import { Header, Footer } from "./component/index.js";
 import { Outlet } from "react-router-dom";
 function App() {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   authService
-  //     .getCurrentUser()
-  //     .then((userData) => {
-  //       if (userData) {
-  //         dispatch(login({ userData }));
-  //       } else {
-  //         dispatch(logout());
-  //       }
-  //     })
-  //     .finally(() => {
-  //       setLoading(false);
-  //     });
-  // }, []);
-
   useEffect(() => {
-    authService.getCurrentUser().then((userData) => {
-      if (userData) {
-        dispatch(loginOne({userData}))
-      }else{
-        dispatch(logoutOne())
-      }
-    })
-    .finally(() => {
-      setLoading(false)
-    })
-  },[])
+    authService
+      .getCurrentUser()
+      .then((userData) => {
+        if (userData) {
+          dispatch(login({ userData }));
+        } else {
+          dispatch(logout());
+        }
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
+
+
 
   return !loading ? (
     <div className="min-h-screen flex flex-wrap content-between text-white text-2xl">
       <div className="w-full block">
-        <Header/>
-        <main>
-          TODO: {/* <Outet/> */}
-        </main>
-        <Footer/>
+        <Header />
+        <main>TODO: {/* <Outet/> */}</main>
+        <Footer />
       </div>
     </div>
-  ) : null
+  ) : null;
 }
 
 export default App;
