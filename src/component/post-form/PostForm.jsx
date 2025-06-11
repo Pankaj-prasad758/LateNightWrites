@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from "react";
-import { RTE, Input, Button } from "../index";
+import { RTE, Input, Button, Select } from "../index";
 import { useForm } from "react-hook-form";
 import databasesService from "../../appwrite/configService/config-Service";
 import { useNavigate } from "react-router-dom";
