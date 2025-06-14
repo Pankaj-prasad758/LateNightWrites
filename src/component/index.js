@@ -12,6 +12,7 @@ import Protected from "./AuthLayout";
 import PostCard from "./PostCard";
 import Signup from "./Signup";
 import PostForm from "./post-form/PostForm";
+import AuthLayout from "./AuthLayout"
 export {
   Header,
   Select,
@@ -26,5 +27,6 @@ export {
   Signup,
   PostCard,
   Protected,
-  PostForm
+  PostForm,
+  AuthLayout
 };
