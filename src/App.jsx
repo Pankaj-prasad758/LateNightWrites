@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import authService from "./appwrite/auth/auth.js";
 import { login, logout } from "./store/authSlice.js";
-import { Header, Footer } from "./component/index.js";
+import { Header, Footer, Login, Signup} from "./component/index.js";
 import { Outlet } from "react-router-dom";
 function App() {
   const [loading, setLoading] = useState(true);
@@ -30,7 +30,11 @@ function App() {
     <div className="min-h-screen flex flex-wrap content-between text-white text-2xl">
       <div className="w-full block">
         <Header />
-        <main>TODO: {/* <Outet/> */}</main>
+        <main>
+          TODO: {/* <Outet/> */}
+       
+
+        </main>
         <Footer />
       </div>
     </div>

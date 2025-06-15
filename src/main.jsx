@@ -9,9 +9,12 @@ import Home from "./pages/Home.jsx";
 
 // import Login from "./component/Login.jsx";
 import {AuthLayout, Login} from "./component/index.js"
-import {AllPosts, AddPost, EditPost, Post} from "./pages/index.js"
+// import {AllPosts, AddPost, EditPost, Post} from "./pages/index.js"
+import AddPost from "./pages/AddPost.jsx"
 import Signup from "./pages/Signup.jsx";
-
+import EditPost from "./pages/EditPost.jsx"
+import Post from "./pages/Post.jsx"
+import AllPosts from "./pages/AllPosts.jsx"
 
 const router = createBrowserRouter([
   {
@@ -76,9 +79,8 @@ const router = createBrowserRouter([
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router}>
-        <App />
-      </RouterProvider>
+      <RouterProvider router={router}/>
+  
     </Provider>
   </StrictMode>
 );

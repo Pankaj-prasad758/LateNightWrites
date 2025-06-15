@@ -1,6 +1,5 @@
-
-import { Client, Account, ID } from "appwrite";
 import config from "../../config/config.js";
+import { Client, Account, ID } from "appwrite";
 
 // Reuseable Auth service code
 export class AuthService {
@@ -46,11 +45,13 @@ export class AuthService {
 
   async getCurrentUser() {
     try {
-    const user =  await this.account.get();
-    return user
-     
+      const user = await this.account
+        .get()
+        .then((user) => console.log("Connected: ", user))
+        .catch((err) => console.log("Connection Error: ", err));
+      return user;
     } catch (error) {
-      console.log("getCurretUser  error", error);
+      console.log("getCurretUser :: testing....!!!!!  error", error);
     }
 
     return null;

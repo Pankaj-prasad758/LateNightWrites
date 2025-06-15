@@ -39,15 +39,15 @@ function Header({ width = "100px" }) {
     },
   ];
   return (
-     <header className="py-3 shadow bg-gray-600">
+     <header className="py-3 shadow bg-gray-500">
       <Container>
         <nav className="flex">
           <div className="mr-4">
-            <Link>
+            <Link to={'/'}>
               <Logo width="70px" />
             </Link>
           </div>
-          <ul>
+          <ul className='flex ml-auto'>
             {navItems.map((item) =>
               item.active ? (
                 <li key={item.name}>
