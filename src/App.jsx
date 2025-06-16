@@ -3,8 +3,9 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import authService from "./appwrite/auth/auth.js";
 import { login, logout } from "./store/authSlice.js";
-import { Header, Footer, Login, Signup} from "./component/index.js";
+import { Header, Footer} from "./component/index.js";
 import { Outlet } from "react-router-dom";
+
 function App() {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
@@ -31,8 +32,8 @@ function App() {
       <div className="w-full block">
         <Header />
         <main>
-          TODO: {/* <Outet/> */}
-       
+        
+       {"cool"}
 
         </main>
         <Footer />

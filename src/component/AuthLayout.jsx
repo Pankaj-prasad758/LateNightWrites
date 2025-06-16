@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-export default function Protected({ children, authentication = true }) {
+export default function AuthLayout({ children, authentication = true }) {
   const navigate = useNavigate();
   const [loader, setLoader] = useState(true);
   // check whether user loggedIn or not using store
