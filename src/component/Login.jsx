@@ -11,8 +11,8 @@ function Login() {
   
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [error, setError] = useState("");
   const { register, handleSubmit } = useForm();
+  const [error, setError] = useState("");
 
   const login = async (data) => {
     // always empty out error before submission
@@ -62,7 +62,7 @@ function Login() {
                 required: true,
                 validate: {
                   matchPattern: (value) =>
-                    /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value) ||
+                    /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
                     "Enter address must be a valid address",
                 },
               })}
@@ -72,12 +72,10 @@ function Login() {
               placeholder="Enter your password"
               type="password"
               {...register("password", {
-                required: true,
-                validate: {
-                  matchPattern: (value) =>
-                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/.test(
-                      value
-                    ) || "Enter password must be a valid password",
+                   required: "Password is required",
+                minLength: {
+                  value: 6,
+                  message: "Password must be at least 6 characters",
                 },
               })}
             />

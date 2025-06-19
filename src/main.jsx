@@ -15,18 +15,18 @@ import AllPosts from "./pages/AllPosts.jsx"
 
 const router = createBrowserRouter([
   {
-    path:'/',
-    element: <App/>,
+    path:"/",
+    element: <App />,
     children:[
       {
-        path:'/',
-        element:<Home/>
+        path:"/",
+        element:<Home />
       },
       {
-        path:'/login',
+        path: "/login",
         element:(
           <AuthLayout authentication={false}>
-            <Login/>
+            <Login />
           </AuthLayout>
         )
       },

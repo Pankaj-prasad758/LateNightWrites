@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from 'react'
-import {Container, PostCard} from "../component/index"
 import databasesService from '../appwrite/configService/config-Service'
+import {Container, PostCard} from "../component/index"
 function Home() {
-    const [posts, setPosts] = useState(null)
+    console.log("hey this is Home component");
+    
+    const [posts, setPosts] = useState([])
     
     useEffect(() => {
         databasesService.getPosts().then((posts) => {

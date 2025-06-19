@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { Button, Logo, Input } from "../component/index";
 import authService from "../appwrite/auth/auth";
-import { login as storeLogin } from "../store/authSlice";
+import { login } from "../store/authSlice";
 
 function Signup() {
   const navigate = useNavigate();
@@ -18,8 +18,8 @@ function Signup() {
       const userData = await authService.createAccount(data);
 
       if (userData) {
-        const useData = await authService.getCurrentUser()
-        if (userData) dispatch(login(userData));
+        const currentUser = await authService.getCurrentUser()
+        if (currentUser) dispatch(login(userData));
         navigate("/");
       }
     } catch (error) {
@@ -76,9 +76,10 @@ function Signup() {
             placeholder="Enter your password"
             type="password"
             {...register("password",{
-                required:true,
-                validate:{
-                    matchPattern: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value) || "Enter valid password"
+                required: "Password is required",
+                minLength: {
+                  value: 6,
+                  message: "Password must be at least 6 characters",
                 }
             })}
             />
