@@ -42,6 +42,10 @@ export class AuthService {
       throw error;
     }
   }
+  
+  // async createSession({}) {
+
+  // }
 
   async getCurrentUser() {
     try {

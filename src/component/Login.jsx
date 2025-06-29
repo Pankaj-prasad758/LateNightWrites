@@ -8,15 +8,21 @@ import { useForm } from "react-hook-form";
 
 function Login() {
   console.log("hey this is login");
-  
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
   const [error, setError] = useState("");
-
+  const [loading, setLoading] = useState(false);
   const login = async (data) => {
     // always empty out error before submission
     setError("");
+    setLoading(true);
 
     try {
       const session = await authService.login(data);
@@ -27,7 +33,9 @@ function Login() {
         navigate("/");
       }
     } catch (error) {
-      setError(error.message);
+      setError(error?.message || "An unexpected error occurred.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -49,7 +57,9 @@ function Login() {
           <Link
             to={"/signup"}
             className="font-medium text-primary transition-all duration-200 hover:underline"
-          ></Link>
+          >
+            Sign up
+          </Link>
         </p>
         {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
         <form onSubmit={handleSubmit(login)} className="mt-8">
@@ -62,8 +72,9 @@ function Login() {
                 required: true,
                 validate: {
                   matchPattern: (value) =>
-                    /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
-                    "Enter address must be a valid address",
+                    /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value)
+                      ? true
+                      : "Email must be a valid address",
                 },
               })}
             />
@@ -72,7 +83,7 @@ function Login() {
               placeholder="Enter your password"
               type="password"
               {...register("password", {
-                   required: "Password is required",
+                required: "Password is required",
                 minLength: {
                   value: 6,
                   message: "Password must be at least 6 characters",
@@ -80,7 +91,7 @@ function Login() {
               })}
             />
             <Button type="submit" className="w-full">
-              Sign in
+              {loading ? "Signing in..." : "Sign in"}
             </Button>
           </div>
         </form>
