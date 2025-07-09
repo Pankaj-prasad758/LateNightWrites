@@ -25,7 +25,21 @@ function Login() {
     setLoading(true);
 
     try {
+      const sessionId = await authService.sessionId();
+      const currentSession = sessionId.sessions.find(
+        (session) => session.current === true
+      );
+      const deleteUserSession = await authService.deleteSession();
+      console.log("this is deleteSession",deleteSession());
+
+      if (currentSession) {
+           deleteUserSession(currentSession.$id)
+        console.log("Current session ID:", currentSession.$id);
+      }
+
+      // console.log(sessionId);
       const session = await authService.login(data);
+
       if (session) {
         // userData is coming from authService not from session
         const userData = await authService.getCurrentUser();

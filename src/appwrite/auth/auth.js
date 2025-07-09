@@ -43,9 +43,40 @@ export class AuthService {
     }
   }
   
-  // async createSession({}) {
 
-  // }
+  // list sessions for sessionId
+
+  async sessionId(){
+    try {
+     const sessions = await this.account.listSessions()
+      console.log(sessions);
+      
+
+    
+    return sessions} 
+    catch (error) {
+      console.log("sessionId error ::", error);
+      
+    }
+  }
+
+
+
+
+
+// delete session
+
+async deleteSession(){
+  try {
+    await this.account.deleteSession
+  } catch (error) {
+   console.log("delete session error :: ", error);
+    
+  }
+}
+
+
+
 
   async getCurrentUser() {
     try {
