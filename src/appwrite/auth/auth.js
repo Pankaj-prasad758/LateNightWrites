@@ -33,11 +33,11 @@ export class AuthService {
 
   async login({ email, password }) {
     try {
-      const userLogin = await this.account.createEmailPasswordSession(
+   return await this.account.createEmailPasswordSession(
         email,
         password
       );
-      return userLogin;
+ 
     } catch (error) {
       throw error;
     }
@@ -66,15 +66,14 @@ export class AuthService {
 
 // delete session
 
-async deleteSession(){
+async  deleteSession(sessionId)  {
   try {
-    await this.account.deleteSession
+    return await account.deleteSession(sessionId);
   } catch (error) {
-   console.log("delete session error :: ", error);
+    console.log("deleteSession error ::", error);
     
   }
-}
-
+};
 
 
 

@@ -19,39 +19,45 @@ function Login() {
   });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const login = async (data) => {
-    // always empty out error before submission
-    setError("");
-    setLoading(true);
 
-    try {
-      const sessionId = await authService.sessionId();
-      const currentSession = sessionId.sessions.find(
-        (session) => session.current === true
-      );
-      const deleteUserSession = await authService.deleteSession();
-      console.log("this is deleteSession",deleteSession());
 
-      if (currentSession) {
-           deleteUserSession(currentSession.$id)
-        console.log("Current session ID:", currentSession.$id);
-      }
 
-      // console.log(sessionId);
-      const session = await authService.login(data);
+const login = async (data) => {
+  setError("");
+  setLoading(true);
 
-      if (session) {
-        // userData is coming from authService not from session
-        const userData = await authService.getCurrentUser();
-        if (userData) dispatch(storeLogin(userData));
-        navigate("/");
-      }
-    } catch (error) {
-      setError(error?.message || "An unexpected error occurred.");
-    } finally {
-      setLoading(false);
+  try {
+    // Step 1: Try to get current sessions
+    const sessionData = await authService.sessionId();
+
+    // Step 2: Delete the current session if it exists
+    const currentSession = sessionData.sessions.find(
+      (session) => session.current === true
+    );
+
+    if (currentSession) {
+      await authService.deleteSession(currentSession.$id);
+      console.log("Deleted current session:", currentSession.$id);
     }
-  };
+
+    // ✅ Step 3: Small pause to ensure session is cleared (optional but helps)
+    await new Promise((res) => setTimeout(res, 300));
+
+    // Step 4: Now safely login
+    const session = await authService.login(data);
+
+    if (session) {
+      const userData = await authService.getCurrentUser();
+      if (userData) dispatch(storeLogin(userData));
+      navigate("/");
+    }
+  } catch (error) {
+    setError(error?.message || "An unexpected error occurred.");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <div className="flex items-center justify-center w-full">
